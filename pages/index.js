@@ -1,4 +1,5 @@
-import React from 'react'
+import Head from 'next/head';
+import React from 'react';
 import _ from 'lodash';
 import getLinkGroups from '../src/getLinkGroups';
 
@@ -19,6 +20,10 @@ class Index extends React.Component {
     render() {
         return (
             <div>
+                <Head>
+                    <title>{appPackage.displayName.toUpperCase()}</title>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+                </Head>
                 <h1>{appPackage.displayName.split('').map((char, i) => <span key={i} data-char={char.toLowerCase()}>{char}</span>)}</h1>
                 <div className="links">
                     {_.chain(this.props.linkGroups).orderBy(['order', 'label'], ['asc', 'asc']).map(linkGroup => 
