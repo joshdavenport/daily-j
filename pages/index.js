@@ -1,36 +1,46 @@
 import React from 'react'
+import _ from 'lodash';
 import getLinkGroups from '../src/getLinkGroups';
 
-require('dotenv').config()
+require('dotenv').config();
+
+import "../scss/styles.scss";
+
+const appPackage = require('../package.json');
 
 class Index extends React.Component {
 
     static async getInitialProps({ req }) {
         const linkGroups = await getLinkGroups();
         
+        console.log(linkGroups);
         return { linkGroups };
     }
 
     render() {
         return (
             <div>
-                <h1>daily j</h1>
+                <h1>{appPackage.displayName.split('').map((char, i) => <span key={i} data-char={char.toLowerCase()}>{char}</span>)}</h1>
                 <div className="links">
-                    {this.props.linkGroups.map(linkGroup => 
-                        <div className="links__group" key={linkGroup.label}>
-                            <h2>{linkGroup.label}</h2>
-                            <ul>
-                                {linkGroup.links.map(link => (
-                                    <li key={link.label}>
+                    {_.chain(this.props.linkGroups).orderBy(['order', 'label'], ['asc', 'asc']).map(linkGroup => 
+                        <div className="links-group" key={linkGroup.label}>
+                            <h2 className="links-group__title">
+                                <span className="links-group__title-text">{linkGroup.label}</span>
+                                {linkGroup.flourish ? <span className="links-group__title-flourish">{linkGroup.flourish}</span> : ''}
+                            </h2>
+                            <ul className="links-group__list">
+                                {_.chain(linkGroup.links).orderBy(['label'], ['asc']).map(link => (
+                                    <li key={link.label} className="link">
                                         <a href={link.url}>
-                                            <img src={link.favicon}/>
-                                            <span>{link.label}</span>
+                                            <img src={link.faviconUrl} className="link__image"/>
+                                            <span className="link__text">{link.label}</span>
+                                            <span className="link__href">{link.url.replace(/^https?:\/\// ,'').replace(/\/.*/, '')}</span>
                                         </a>
                                     </li>
-                                ))}
+                                )).value()}
                             </ul>
                         </div>
-                    )}
+                    ).value()}
                 </div>
             </div>
         );

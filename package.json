@@ -1,5 +1,6 @@
 {
   "name": "daily-j",
+  "displayName": "Daily J",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,12 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
     "dotenv": "^8.2.0",
     "favicon": "0.0.2",
     "firebase": "^7.2.3",
     "lodash": "^4.17.15",
+    "md5": "^2.2.1",
     "next": "^9.1.2",
     "node-pinboard": "^1.0.0",
+    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   }
