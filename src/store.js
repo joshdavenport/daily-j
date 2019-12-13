@@ -71,7 +71,7 @@ export default class Store {
                 writeBatch.set(newLinkRef, {
                     label: pin.description,
                     url: pin.href,
-                    faviconUrl,
+                    faviconUrl: faviconUrl.replace(/^https?/, ''),
                     ...pinTags
                 });
             }
@@ -79,6 +79,8 @@ export default class Store {
 
         writeBatch.set(this.firestore.collection('groups').doc(group.tags.join(',')), {
             expires: new Date(Date.now() + (60 * 60 * 24 * 1000)),
+            order: group.order,
+            flourish: group.flourish,
             tags
         });
         
