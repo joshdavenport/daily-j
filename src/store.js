@@ -56,10 +56,8 @@ export default class Store {
             const deleteBatch = this.firestore.batch();
 
             const linksSnapshot = await this.getLinksCollection(tags).get();
-            console.log('deleting', tags);
             linksSnapshot.forEach(doc => {
                 deleteBatch.delete(doc.ref);
-                console.log(doc.ref.id);
             });
             await deleteBatch.commit();
 

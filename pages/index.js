@@ -12,8 +12,7 @@ class Index extends React.Component {
 
     static async getInitialProps({ req }) {
         const linkGroups = await getLinkGroups();
-        
-        console.log(linkGroups);
+
         return { linkGroups };
     }
 
