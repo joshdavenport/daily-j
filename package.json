@@ -17,7 +17,7 @@
     "dotenv": "^8.2.0",
     "favicon": "0.0.2",
     "firebase": "^7.2.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "md5": "^2.2.1",
     "next": "^9.1.2",
     "node-pinboard": "^1.0.0",
